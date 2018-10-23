@@ -48,12 +48,19 @@ class LinearRegression:
 
 
 dt = np.loadtxt('data/Admission_Predict.csv',delimiter=',',skiprows=1,usecols=range(1,9))
-x_dt = dt[:,:7]
-y_dt = dt[:,7:]
+np.random.shuffle(dt)
+n = dt.shape[0]
+x_train = dt[:int(n*.8),:7]
+y_train = dt[:int(n*.8),7:]
+x_test = dt[int(n*.8):,:7]
+y_test = dt[int(n*.8):,7:]
 
 lr = LinearRegression(max_itr=10000,toll=0.0000001,learning_rate=1)
-lr.fit(x_dt,y_dt)
+lr.fit(x_train,y_train)
 th = lr.th
 
-print('Original Value, Predicted Values')
-print(np.c_[y_dt,lr.predict(x_dt)])
+pv = lr.predict(x_test)
+print('Original Value, Predicted Values on test data')
+print(np.c_[y_test,pv])
+
+print('Mean squared error is : {}'.format(((pv-y_test)**2).mean()))
