@@ -1,5 +1,6 @@
 import numpy as np
 
+#class for linear regression
 class LinearRegression:
     def __init__(self,normalize=True,add_bais=True,learning_rate=0.1,toll=0.0001,max_itr=100):
         self.normalize = normalize
@@ -46,7 +47,7 @@ class LinearRegression:
 
 
 
-
+#loading and splitting
 dt = np.loadtxt('data/Admission_Predict.csv',delimiter=',',skiprows=1,usecols=range(1,9))
 np.random.shuffle(dt)
 n = dt.shape[0]
@@ -55,10 +56,12 @@ y_train = dt[:int(n*.8),7:]
 x_test = dt[int(n*.8):,:7]
 y_test = dt[int(n*.8):,7:]
 
+#creating model object for training
 lr = LinearRegression(max_itr=10000,toll=0.0000001,learning_rate=1)
 lr.fit(x_train,y_train)
 th = lr.th
 
+#prediciting on test data using learned model
 pv = lr.predict(x_test)
 print('Original Value, Predicted Values on test data')
 print(np.c_[y_test,pv])
