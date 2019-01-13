@@ -25,7 +25,7 @@ class LinearRegression:
     def fit(self,X,y):
         '''
         DESCRIPTION:
-        takes input data and corrosponding labels and returns the parametes for hypothesis
+        takes input data and corrosponding values and returns the parametes for hypothesis
         INPUT:
         X(np array): input data
         y(np array): output values
